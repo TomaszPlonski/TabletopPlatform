@@ -9,8 +9,7 @@ import java.io.Serializable;
 @Table(name = "users")
 @Data
 public class UserEntity implements Serializable {
-
-    private static final long serialVersionUID = -2731425678149216053L;
+    private static final long serialVersionUID = 8042599466310131550L;
 
     @Id
     @GeneratedValue
