@@ -1,5 +1,6 @@
 package com.tomaszplonski.TabletopPlatform.UsersMS.controllers;
 
+import com.tomaszplonski.TabletopPlatform.UsersMS.Service.UsersService;
 import com.tomaszplonski.TabletopPlatform.UsersMS.Service.UsersServiceImpl;
 import com.tomaszplonski.TabletopPlatform.UsersMS.data.UserEntity;
 import com.tomaszplonski.TabletopPlatform.UsersMS.model.CreateUserModel;
@@ -8,6 +9,7 @@ import com.tomaszplonski.TabletopPlatform.UsersMS.shared.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class UsersController {
 
-   private final UsersServiceImpl usersService;
+   private final UsersService usersService;
    private final ModelMapper modelMapper;
 
     @GetMapping
@@ -26,7 +28,9 @@ public class UsersController {
         return "Working.....";
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+                 produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
+                 )
     public ResponseEntity<CreateUserResponseModel> createUser(@Valid @RequestBody CreateUserModel usersDetail){
         UserDto userDto = modelMapper.map(usersDetail, UserDto.class);
         UserEntity createdUser = usersService.createUsers(userDto);
