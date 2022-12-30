@@ -7,7 +7,9 @@ import com.tomaszplonski.TabletopPlatform.UsersMS.model.CreateUserModel;
 import com.tomaszplonski.TabletopPlatform.UsersMS.model.CreateUserResponseModel;
 import com.tomaszplonski.TabletopPlatform.UsersMS.shared.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ public class UsersController {
 
    private final UsersService usersService;
    private final ModelMapper modelMapper;
+   private final Environment environment;
 
     @GetMapping
     public String status(){
