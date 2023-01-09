@@ -1,6 +1,8 @@
 package com.tomaszplonski.TabletopPlatform.ApiGateway;
 
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -17,6 +19,7 @@ import reactor.core.publisher.Mono;
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory {
 
    private final Environment environment;
+   final Logger logger = LoggerFactory.getLogger(PathAndHeadersPreFilter.class);
 
     public AuthorizationHeaderFilter(Environment environment){
         super(Config.class);
@@ -29,20 +32,24 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory {
 
     @Override
     public GatewayFilter apply(Object config) {
+        logger.info("___________________AuthorizationHeaderFilter");
         return ((exchange, chain) -> {
 
             ServerHttpRequest request = exchange.getRequest();
 
             if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)){
-                return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
+                return onError(exchange, "No authorization header", HttpStatus.I_AM_A_TEAPOT);
             }
+            logger.info("___________________1");
 
             String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String jwt = authorizationHeader.replace("Bearer", "");
+            logger.info("___________________2");
 
             if (!isJwtValid(jwt)){
-                return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
+                return onError(exchange, "JWT token is not valid", HttpStatus.I_AM_A_TEAPOT);
             }
+            logger.info("___________________3");
 
             return chain.filter(exchange);
         });
