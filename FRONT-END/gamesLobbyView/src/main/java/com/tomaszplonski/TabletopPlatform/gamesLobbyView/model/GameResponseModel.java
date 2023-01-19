@@ -1,4 +1,4 @@
-package com.tomaszplonski.TabletopPlatform.gamesLobby.model;
+package com.tomaszplonski.TabletopPlatform.gamesLobbyView.model;
 
 import lombok.Data;
 

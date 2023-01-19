@@ -1,7 +1,7 @@
 package com.tomaszplonski.TabletopPlatform.gamesLobby.controllers;
 
 import com.tomaszplonski.TabletopPlatform.gamesLobby.model.CreateGameModel;
-import com.tomaszplonski.TabletopPlatform.gamesLobby.model.ListOfGamesResponseModel;
+import com.tomaszplonski.TabletopPlatform.gamesLobby.model.GameResponseModel;
 import com.tomaszplonski.TabletopPlatform.gamesLobby.service.GamesLibraryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Random;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class LobbyController {
 
     @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    private ResponseEntity<ListOfGamesResponseModel> gameList(){
+    private ResponseEntity<List<GameResponseModel>> gameList(){
 
         return ResponseEntity.status(HttpStatus.OK).body(gamesLibraryService.getAllGames());
 

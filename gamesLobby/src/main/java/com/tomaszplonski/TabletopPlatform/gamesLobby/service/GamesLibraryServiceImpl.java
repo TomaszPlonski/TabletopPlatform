@@ -3,13 +3,13 @@ package com.tomaszplonski.TabletopPlatform.gamesLobby.service;
 import com.tomaszplonski.TabletopPlatform.gamesLobby.data.GamesLibraryEntity;
 import com.tomaszplonski.TabletopPlatform.gamesLobby.model.CreateGameModel;
 import com.tomaszplonski.TabletopPlatform.gamesLobby.model.GameResponseModel;
-import com.tomaszplonski.TabletopPlatform.gamesLobby.model.ListOfGamesResponseModel;
 import com.tomaszplonski.TabletopPlatform.gamesLobby.repository.GamesLibraryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -29,12 +29,12 @@ public class GamesLibraryServiceImpl implements GamesLibraryService {
     }
 
     @Override
-    public ListOfGamesResponseModel getAllGames(){
+    public List<GameResponseModel> getAllGames(){
 
        List<GamesLibraryEntity> gamesFromDb = (List<GamesLibraryEntity>) gamesLibraryRepository.findAll();
-       ListOfGamesResponseModel gamesForResponse = new ListOfGamesResponseModel();
+      List<GameResponseModel> gamesForResponse = new ArrayList<>();
 
-       gamesFromDb.forEach(e -> gamesForResponse.addGameToList(modelMapper.map(e, GameResponseModel.class)));
+       gamesFromDb.forEach(e -> gamesForResponse.add(modelMapper.map(e, GameResponseModel.class)));
 
        return gamesForResponse;
 
