@@ -17,7 +17,7 @@ import java.util.Random;
 
 @Slf4j
 @RestController
-@RequestMapping("/games")
+@RequestMapping("/rest")
 @RequiredArgsConstructor
 public class LobbyController {
 
