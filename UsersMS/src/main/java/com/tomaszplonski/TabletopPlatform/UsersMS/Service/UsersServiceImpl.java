@@ -30,7 +30,13 @@ public class UsersServiceImpl implements UsersService {
 
         UserEntity userEntity = modelMapper.map(userDetails, UserEntity.class);
 
-        return usersRepository.save(userEntity);
+        try{
+            return usersRepository.save(userEntity);
+        } catch (Exception e){
+            UserEntity failToCreateUser = new UserEntity();
+            failToCreateUser.setId(-1);
+            return failToCreateUser;
+        }
 
     }
 

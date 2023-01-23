@@ -42,6 +42,12 @@ public class UsersController {
 
         CreateUserResponseModel returnValue = modelMapper.map(createdUser, CreateUserResponseModel.class);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
+        HttpStatus responseStatus = HttpStatus.CREATED;
+
+        if(createdUser.getId()<0){
+            responseStatus = HttpStatus.OK;
+        }
+
+        return ResponseEntity.status(responseStatus).body(returnValue);
     }
 }
