@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>Expect an exception...</head>
+<head></head>
 <body>
 <c:choose>
     <c:when test="${empty error.message}">

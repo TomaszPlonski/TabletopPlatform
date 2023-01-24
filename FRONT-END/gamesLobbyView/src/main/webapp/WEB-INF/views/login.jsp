@@ -7,18 +7,12 @@
 <body>
 <form method="post">
     <div>
-        <input type="text" name="firstName" placeholder="First Name"/> </label>
-    </div>
-    <div>
-        <input type="text" name="lastName" placeholder="Last Name"/> </label>
-    </div>
-    <div>
         <input type="email" name="email" placeholder="Email"/> </label>
     </div>
     <div>
         <input type="password" name="password" placeholder="Password"/>
     </div>
-    <button type="submit" value="Register">Register</button>
+    <button type="submit" value="Login">Login</button>
 </form>
 </body>
 </html>

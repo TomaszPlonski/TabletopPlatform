@@ -45,7 +45,7 @@ public class UsersController {
         HttpStatus responseStatus = HttpStatus.CREATED;
 
         if(createdUser.getId()<0){
-            responseStatus = HttpStatus.OK;
+            responseStatus = HttpStatus.CONTINUE;
         }
 
         return ResponseEntity.status(responseStatus).body(returnValue);
